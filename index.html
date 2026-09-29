@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 页面标题要求：Student Enrollment System -->
+  <title>Student Enrollment System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Student Enrollment System</h1>
+      <p>Please fill out the form below to complete your enrollment.</p>
+    </header>
+
+    <!-- 成功提示条 (默认隐藏) -->
+    <div id="success-banner" class="success-banner" style="display: none;">
+      Enrollment submitted successfully!
+    </div>
+
+    <!-- 注册表单 (添加 novalidate 避免浏览器默认气泡干扰自定义 JS 验证) -->
+    <form id="enrollment-form" novalidate>
+      <div class="form-grid">
+        
+        <!-- Student ID (必填，至少 5 个字符) -->
+        <div class="form-group full-width">
+          <label for="student-id">Student ID <span class="required">*</span></label>
+          <input type="text" id="student-id" placeholder="e.g., 2026-12345" />
+          <small class="error-msg" id="student-id-error"></small>
+        </div>
+
+        <!-- Prefix (可选，若填则至少 2 个字符) -->
+        <div class="form-group">
+          <label for="prefix">Prefix (Optional)</label>
+          <input type="text" id="prefix" placeholder="e.g., Mr., Ms." />
+          <small class="error-msg" id="prefix-error"></small>
+        </div>
+
+        <!-- First Name (必填，至少 3 个字符) -->
+        <div class="form-group">
+          <label for="first-name">First Name <span class="required">*</span></label>
+          <input type="text" id="first-name" placeholder="First Name" />
+          <small class="error-msg" id="first-name-error"></small>
+        </div>
+
+        <!-- Middle Name (可选，若填则至少 2 个字符) -->
+        <div class="form-group">
+          <label for="middle-name">Middle Name (Optional)</label>
+          <input type="text" id="middle-name" placeholder="Middle Name" />
+          <small class="error-msg" id="middle-name-error"></small>
+        </div>
+
+        <!-- Last Name (必填，至少 2 个字符) -->
+        <div class="form-group">
+          <label for="last-name">Last Name <span class="required">*</span></label>
+          <input type="text" id="last-name" placeholder="Last Name" />
+          <small class="error-msg" id="last-name-error"></small>
+        </div>
+
+        <!-- Suffix (可选，若填则至少 2 个字符) -->
+        <div class="form-group">
+          <label for="suffix">Suffix (Optional)</label>
+          <input type="text" id="suffix" placeholder="e.g., Jr., III" />
+          <small class="error-msg" id="suffix-error"></small>
+        </div>
+
+        <!-- Email (必填，符合邮箱格式) -->
+        <div class="form-group full-width">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" placeholder="student@example.com" />
+          <small class="error-msg" id="email-error"></small>
+        </div>
+
+        <!-- Course (必选) -->
+        <div class="form-group">
+          <label for="course">Course <span class="required">*</span></label>
+          <select id="course">
+            <option value="">-- Select Course --</option>
+            <option value="BSIT">BSIT</option>
+            <option value="BSCS">BSCS</option>
+            <option value="BMMA">BMMA</option>
+            <option value="BSAIS">BSAIS</option>
+          </select>
+          <small class="error-msg" id="course-error"></small>
+        </div>
+
+        <!-- Major (仅在选择 BSIT 时显示) -->
+        <div class="form-group" id="major-container" style="display: none;">
+          <label for="major">Major (BSIT) <span class="required">*</span></label>
+          <select id="major">
+            <option value="">-- Select Major --</option>
+            <option value="Net Sec">Net Sec</option>
+            <option value="Web Tech">Web Tech</option>
+            <option value="ERP">ERP</option>
+          </select>
+          <small class="error-msg" id="major-error"></small>
+        </div>
+
+        <!-- Year Level (必选：1st - 3rd Year) -->
+        <div class="form-group">
+          <label for="year-level">Year Level <span class="required">*</span></label>
+          <select id="year-level">
+            <option value="">-- Select Year Level --</option>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+          </select>
+          <small class="error-msg" id="year-level-error"></small>
+        </div>
+
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn-submit">Submit Enrollment</button>
+    </form>
+
+    <!-- 提交数据显示区域 -->
+    <section class="records-section">
+      <h2>Enrolled Students</h2>
+      <div class="table-responsive">
+        <table id="records-table">
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Course & Major</th>
+              <th>Year Level</th>
+            </tr>
+          </thead>
+          <tbody id="records-body">
+            <!-- 提交后由 JS 动态插入新行 -->
+            <tr id="empty-row">
+              <td colspan="5" class="empty-text">No enrollments yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
